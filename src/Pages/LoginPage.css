@@ -60,10 +60,10 @@
   height: 20px;
 }
 
-.input-submit {
+.entrance .input-submit {
   width: 468px;
   height: 48px;
-  margin-top: 10%;
+  margin-top: 2%;
   padding: 8px 12px 8px 12px;
   gap: 10px;
   border-radius: 8px;

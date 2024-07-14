@@ -60,9 +60,9 @@
   height: 20px;
 }
 
-.input-submit {
+.registration .input-submit {
   width: 468px;
-
+  height: 48px;
   margin-top: 2%;
   padding: 8px 12px 8px 12px;
   gap: 8px;
