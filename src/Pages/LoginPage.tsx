@@ -1,57 +1,30 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./LoginPage.css";
-import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import Input from "../Components/Input";
 
 const LoginPage: React.FC = () => {
-  const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
-  const [isPassShow, setIsPassShow] = useState(false);
-
-  const changeEmail = (value: string) => {
-    setEmail(value);
-  };
-  const changePass = (value: string) => {
-    setPass(value);
-  };
-
-  console.log(email, pass);
-
   const handleRegistration = (item: any) => {
     item.preventDefault();
+    console.log(item);
   };
 
   return (
     <div className="entrance">
       <form id="form">
         <h2>Войти</h2>
-        <label htmlFor="email">Электронная почта</label>
-        <input
+        <Input
           type="email"
-          id="email"
+          label="Электронная почта"
           placeholder="example@mail.ru"
-          value={email}
-          onChange={(e) => changeEmail(e.target.value)}
-          required
+          required={true}
         />
-        <label htmlFor="pass">Пароль</label>
-        <span className="password">
-          <input
-            type={isPassShow ? "text" : "password"}
-            id="pass"
-            placeholder="Введите пароль"
-            value={pass}
-            onChange={(e) => changePass(e.target.value)}
-            required
-          />
-          <i className="password-control">
-            {isPassShow ? (
-              <FaRegEye onClick={() => setIsPassShow(!isPassShow)} />
-            ) : (
-              <FaRegEyeSlash onClick={() => setIsPassShow(!isPassShow)} />
-            )}
-          </i>
-        </span>
+        <Input
+          type="password"
+          label="Пароль"
+          placeholder="Введите пароль"
+          required={true}
+        />
       </form>
       <input
         type="submit"

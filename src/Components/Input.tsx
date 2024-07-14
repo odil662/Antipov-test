@@ -8,35 +8,35 @@ const Input = ({ required, type, placeholder, label }: InputTypesProps) => {
 
   return (
     <>
-      <label htmlFor={type}>{label}</label>
-      {type === "password" ? (
-        <span className="password">
+      <label>
+        {label}
+        {type === "password" ? (
+          <span className="password">
+            <input
+              type={isPassShow ? "text" : type}
+              placeholder={placeholder}
+              value={value}
+              onChange={(e) => setInputValue(e.target.value)}
+              required={required}
+            />
+            <i className="password-control">
+              {isPassShow ? (
+                <FaRegEye onClick={() => setIsPassShow(!isPassShow)} />
+              ) : (
+                <FaRegEyeSlash onClick={() => setIsPassShow(!isPassShow)} />
+              )}
+            </i>
+          </span>
+        ) : (
           <input
-            type={isPassShow ? "text" : type}
-            id={type}
+            type={type}
             placeholder={placeholder}
             value={value}
             onChange={(e) => setInputValue(e.target.value)}
             required={required}
           />
-          <i className="password-control">
-            {isPassShow ? (
-              <FaRegEye onClick={() => setIsPassShow(!isPassShow)} />
-            ) : (
-              <FaRegEyeSlash onClick={() => setIsPassShow(!isPassShow)} />
-            )}
-          </i>
-        </span>
-      ) : (
-        <input
-          type={type}
-          id={type}
-          placeholder={placeholder}
-          value={value}
-          onChange={(e) => setInputValue(e.target.value)}
-          required={required}
-        />
-      )}
+        )}
+      </label>
     </>
   );
 };
