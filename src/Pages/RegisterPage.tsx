@@ -14,7 +14,7 @@ const RegisterPage: FC = () => {
 
   return (
     <div className="registration">
-      <form id="form">
+      <form id="form" onSubmit={(e) => handleRegistration(e)}>
         <h2>Регистрация</h2>
         <Input type="text" label="Имя" placeholder="Ваше имя" required={true} />
         <Input
@@ -35,12 +35,12 @@ const RegisterPage: FC = () => {
           placeholder="Введите пароль"
           required={true}
         />
+        <input
+          className="input-submit"
+          type="submit"
+          value={"Зарегистрироваться"}
+        />
       </form>
-      <input
-        type="submit"
-        onClick={(e) => handleRegistration(e)}
-        value={"Зарегистрироваться"}
-      />
       <p>
         Уже зарегистрированы ? <Link to="/login">Войти</Link>
       </p>

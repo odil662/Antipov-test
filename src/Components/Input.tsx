@@ -13,6 +13,7 @@ const Input = ({ required, type, placeholder, label }: InputTypesProps) => {
         {type === "password" ? (
           <span className="password">
             <input
+              className="input"
               type={isPassShow ? "text" : type}
               placeholder={placeholder}
               value={value}
@@ -29,6 +30,7 @@ const Input = ({ required, type, placeholder, label }: InputTypesProps) => {
           </span>
         ) : (
           <input
+            className="input"
             type={type}
             placeholder={placeholder}
             value={value}

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./LoginPage.css";
 import Input from "../Components/Input";
 
+const form = document.querySelector("form");
 const LoginPage: React.FC = () => {
   const handleRegistration = (item: any) => {
     item.preventDefault();
@@ -11,7 +12,7 @@ const LoginPage: React.FC = () => {
 
   return (
     <div className="entrance">
-      <form id="form">
+      <form id="form" onSubmit={(e) => handleRegistration(e)}>
         <h2>Войти</h2>
         <Input
           type="email"
@@ -25,12 +26,8 @@ const LoginPage: React.FC = () => {
           placeholder="Введите пароль"
           required={true}
         />
+        <input type="submit" className="input-submit" value={"Войти"} />
       </form>
-      <input
-        type="submit"
-        onClick={(e) => handleRegistration(e)}
-        value={"Войти"}
-      />
       <p>
         Ещё не зарегистрированы ? <Link to="/register">Регистрация</Link>
       </p>
