@@ -1,3 +1,6 @@
-export interface inputTypesProps {
-  types: string[];
+export interface InputTypesProps {
+  required: boolean;
+  type: string;
+  placeholder: string;
+  label: string;
 }
