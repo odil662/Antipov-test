@@ -18,9 +18,9 @@ const LoginPage: React.FC = () => {
 
   console.log(emailValidationError, passwordValidationError);
   return (
-    <div className="container">
-      <div className="card">
-        <form id="form" onSubmit={(e) => handleRegistration(e)}>
+    <div className="container authContainer">
+      <div className="card authCard">
+        <form className="form" onSubmit={(e) => handleRegistration(e)}>
           <h2>Войти</h2>
           <Input
             type="email"
@@ -29,14 +29,14 @@ const LoginPage: React.FC = () => {
             required={true}
           />
           <Input
-            type="password"
+            type="password1"
             label="Пароль"
             placeholder="Введите пароль"
             required={true}
           />
-          <input type="submit" className="input-submit" value={"Войти"} />
         </form>
-        <p>
+        <button className="btnSubmit">Войти</button>
+        <p className="loginLink">
           Ещё не зарегистрированы ? <Link to="/register">Регистрация</Link>
         </p>
       </div>

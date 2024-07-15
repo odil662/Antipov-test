@@ -2,6 +2,7 @@ import { FC, useState } from "react";
 import { Link } from "react-router-dom";
 import Input from "../Components/Input";
 
+const form = document.querySelector("form");
 const RegisterPage: FC = () => {
   const matchFields = (pass1: string, pass2: string) => {
     return pass1 === pass2;
@@ -9,18 +10,18 @@ const RegisterPage: FC = () => {
 
   const handleRegistration = (item: any) => {
     item.preventDefault();
-    if (item.target[2].value !== item.target[3].value) {
-      alert("Пароли не совпадают");
-    } else {
-    }
+    // if (item.target[2].value !== item.target[3].value) {
+    //   alert("Пароли не совпадают");
+    // } else {
+    // }
 
-    console.log(item);
+    console.log(form);
   };
 
   return (
-    <div className="container">
-      <div className="card">
-        <form id="form" onSubmit={(e) => handleRegistration(e)}>
+    <div className="container authContainer">
+      <div className="card authCard">
+        <form className="form" onSubmit={(e) => handleRegistration(e)}>
           <h2>Регистрация</h2>
           <Input
             type="text"
@@ -35,24 +36,22 @@ const RegisterPage: FC = () => {
             required={true}
           />
           <Input
-            type="password"
+            type="password1"
             label="Пароль"
             placeholder="Введите пароль"
             required={true}
           />
           <Input
-            type="password"
+            type="password2"
             label="Подтвердите пароль"
             placeholder="Введите пароль"
             required={true}
           />
-          <input
-            className="input-submit"
-            type="submit"
-            value={"Зарегистрироваться"}
-          />
         </form>
-        <p>
+        <button className="btnSubmit" onClick={handleRegistration}>
+          Зарегистрироваться
+        </button>
+        <p className="loginLink">
           Уже зарегистрированы ? <Link to="/login">Войти</Link>
         </p>
       </div>
