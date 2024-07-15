@@ -10,6 +10,12 @@ const RegisterPage: FC = () => {
 
   const handleRegistration = (item: any) => {
     item.preventDefault();
+    if (item.target[2].value !== item.target[3].value) {
+      alert("Пароли не совпадают");
+    } else {
+    }
+
+    console.log(item);
   };
 
   return (
