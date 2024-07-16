@@ -22,7 +22,7 @@ const RegisterPage: FC = () => {
     <div className="container authContainer">
       <div className="card authCard">
         <form className="form" onSubmit={(e) => handleRegistration(e)}>
-          <h2>Регистрация</h2>
+          <div>Регистрация</div>
           <Input
             type="text"
             label="Имя"
