@@ -2,25 +2,23 @@ import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import Input from "../Components/Input";
 import { validateEmail, validatePassword } from "../helpers/validations";
-import { OrderContext } from "../Components/Context";
 
 const form = document.querySelector("form");
 const LoginPage: React.FC = () => {
-  const {
-    authCard,
-    setAuthCard,
-    emailValidationError,
-    setEmailValidationError,
-    passwordValidationError,
-    setPasswordValidationError,
-  } = useContext(OrderContext);
+  const [authCard, setAuthCard] = useState({
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState({
+    email: "",
+    password: "",
+  });
 
   const handleRegistration = () => {
-    validateEmail(setEmailValidationError)(authCard.email);
-    validatePassword(setPasswordValidationError)(authCard.password1);
+    validateEmail(setError)(error, authCard.email);
+    validatePassword(setError)(error, authCard.password);
   };
 
-  console.log(emailValidationError, passwordValidationError);
   return (
     <div className="container authContainer">
       <div className="card authCard">
@@ -31,14 +29,18 @@ const LoginPage: React.FC = () => {
             label="Электронная почта"
             placeholder="example@mail.ru"
             required={true}
-            errorMessage={emailValidationError}
+            errorMessage={error.email}
+            authCard={authCard}
+            setAuthCard={setAuthCard}
           />
           <Input
             type="password1"
             label="Пароль"
             placeholder="Введите пароль"
             required={true}
-            errorMessage={passwordValidationError}
+            errorMessage={error.password}
+            authCard={authCard}
+            setAuthCard={setAuthCard}
           />
         </form>
         <button className="btnSubmit" onClick={handleRegistration}>

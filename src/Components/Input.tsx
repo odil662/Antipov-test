@@ -1,7 +1,6 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { InputTypesProps } from "../Types/types";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import { OrderContext } from "./Context";
 
 const Input = ({
   required,
@@ -9,10 +8,11 @@ const Input = ({
   placeholder,
   label,
   errorMessage,
+  authCard,
+  setAuthCard,
 }: InputTypesProps) => {
   const [value, setInputValue] = useState("");
   const [isPassShow, setIsPassShow] = useState(false);
-  const { authCard, setAuthCard } = useContext(OrderContext);
 
   useEffect(() => {
     switch (type) {
@@ -20,10 +20,10 @@ const Input = ({
         return setAuthCard({ ...authCard, name: value });
       case "email":
         return setAuthCard({ ...authCard, email: value });
-      case "password1":
-        return setAuthCard({ ...authCard, password1: value });
-      case "password2":
-        return setAuthCard({ ...authCard, password2: value });
+      case "password":
+        return setAuthCard({ ...authCard, password: value });
+      case "confirmPassword":
+        return setAuthCard({ ...authCard, confirmPassword: value });
     }
   }, [value]);
 
@@ -31,7 +31,7 @@ const Input = ({
     <>
       <label>
         {label}
-        {type === "password1" || type === "password2" ? (
+        {type === "password" || type === "confirmPassword" ? (
           <span className="inputPassword">
             <input
               className="input"

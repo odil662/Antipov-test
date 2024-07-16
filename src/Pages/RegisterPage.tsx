@@ -1,7 +1,6 @@
-import { FC, useState, useContext } from "react";
+import { FC, useState } from "react";
 import { Link } from "react-router-dom";
 import Input from "../Components/Input";
-import { OrderContext } from "../Components/Context";
 import {
   validateEmail,
   validateName,
@@ -10,23 +9,28 @@ import {
 
 const form = document.querySelector("form");
 const RegisterPage: FC = () => {
-  const {
-    authCard,
-    setAuthCard,
-    nameValidationError,
-    setNameValidationError,
-    emailValidationError,
-    setEmailValidationError,
-    passwordValidationError,
-    setPasswordValidationError,
-  } = useContext(OrderContext);
+  const [authCard, setAuthCard] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const [error, setError] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
   console.log(authCard);
+
   const handleRegistration = () => {
-    validateName(setNameValidationError)(authCard.name);
-    validateEmail(setEmailValidationError)(authCard.email);
-    validatePassword(setPasswordValidationError)(
-      authCard.password1,
-      authCard.password2
+    validateName(setError)(error, authCard.name);
+    validateEmail(setError)(error, authCard.email);
+    validatePassword(setError)(
+      error,
+      authCard.password,
+      authCard.confirmPassword
     );
   };
 
@@ -40,28 +44,36 @@ const RegisterPage: FC = () => {
             label="Имя"
             placeholder="Ваше имя"
             required={true}
-            errorMessage={nameValidationError}
+            errorMessage={error.name}
+            authCard={authCard}
+            setAuthCard={setAuthCard}
           />
           <Input
             type="email"
             label="Электронная почта"
             placeholder="example@mail.ru"
             required={true}
-            errorMessage={emailValidationError}
+            errorMessage={error.email}
+            authCard={authCard}
+            setAuthCard={setAuthCard}
           />
           <Input
-            type="password1"
+            type="password"
             label="Пароль"
             placeholder="Введите пароль"
             required={true}
-            errorMessage={passwordValidationError}
+            errorMessage={error.password}
+            authCard={authCard}
+            setAuthCard={setAuthCard}
           />
           <Input
-            type="password2"
+            type="confirmPassword"
             label="Подтвердите пароль"
             placeholder="Введите пароль"
             required={true}
-            errorMessage={passwordValidationError}
+            errorMessage={error.confirmPassword}
+            authCard={authCard}
+            setAuthCard={setAuthCard}
           />
         </form>
         <button className="btnSubmit" onClick={handleRegistration}>

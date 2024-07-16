@@ -1,33 +1,39 @@
 import React from "react";
 
 export const validateEmail =
-  (setError: (error: string) => void) => (email: string) => {
+  (setError: (error: any) => void) => (error: object, email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email) {
-      setError("Поле email не должно быть пустым");
+      setError({ ...error, email: "Поле email не должно быть пустым" });
     } else if (!emailRegex.test(email)) {
-      setError("Некорректный email");
+      setError({ ...error, email: "Некорректный email" });
     } else {
-      setError("");
+      setError({ ...error, email: "" });
     }
   };
 
 export const validateName =
-  (setError: (error: string) => void) => (value: string | undefined) => {
+  (setError: (error: any) => void) =>
+  (error: object, value: string | undefined) => {
     if (value === "" || value === undefined) {
-      setError("Поле не может быть пустым");
+      setError({ ...error, name: "Поле не может быть пустым" });
     } else {
-      setError("");
+      setError({ ...error, name: "" });
     }
   };
 
 export const validatePassword =
-  (setError: (error: string) => void) => (pass1?: string, pass2?: string) => {
+  (setError: (error: any) => void) =>
+  (error: object, pass1?: string, pass2?: string) => {
     if (pass1 && pass2) {
       if (pass1 !== pass2) {
-        setError("Пароли не совпадают");
+        setError({
+          ...error,
+          password: "Пароли не совпадают",
+          confirmPassword: "Пароли не совпадают",
+        });
       } else {
-        setError("");
+        setError({ ...error, password: "", confirmPassword: "" });
       }
     } else {
       if (
