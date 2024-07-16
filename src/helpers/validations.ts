@@ -12,11 +12,33 @@ export const validateEmail =
     }
   };
 
-export const validateEmptyField =
-  (setError: (error: string) => void) => (value: string) => {
-    if (value.trim() === "") {
+export const validateName =
+  (setError: (error: string) => void) => (value: string | undefined) => {
+    if (value === "" || value === undefined) {
       setError("Поле не может быть пустым");
     } else {
       setError("");
+    }
+  };
+
+export const validatePassword =
+  (setError: (error: string) => void) => (pass1?: string, pass2?: string) => {
+    if (pass1 && pass2) {
+      if (pass1 !== pass2) {
+        setError("Пароли не совпадают");
+      } else {
+        setError("");
+      }
+    } else {
+      if (
+        pass1 === "" ||
+        pass1 === undefined ||
+        pass2 === "" ||
+        pass2 === undefined
+      ) {
+        setError("Поле не может быть пустым");
+      } else {
+        setError("");
+      }
     }
   };

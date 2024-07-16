@@ -3,4 +3,5 @@ export interface InputTypesProps {
   type: string;
   placeholder: string;
   label: string;
+  errorMessage: string;
 }

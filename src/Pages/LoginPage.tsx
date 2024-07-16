@@ -1,41 +1,49 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import Input from "../Components/Input";
-import { validateEmail, validateEmptyField } from "../helpers/validations";
+import { validateEmail, validatePassword } from "../helpers/validations";
+import { OrderContext } from "../Components/Context";
 
 const form = document.querySelector("form");
 const LoginPage: React.FC = () => {
-  const [emailValidationError, setEmailValidationError] = useState("");
-  const [passwordValidationError, setPasswordValidationError] = useState("");
+  const {
+    authCard,
+    setAuthCard,
+    emailValidationError,
+    setEmailValidationError,
+    passwordValidationError,
+    setPasswordValidationError,
+  } = useContext(OrderContext);
 
-  const handleRegistration = (item: any) => {
-    item.preventDefault();
-    const emailValue = item.target[0].value;
-    const passwordValue = item.target[1].value;
-    validateEmail(setEmailValidationError)(emailValue);
-    validateEmptyField(setPasswordValidationError)(passwordValue);
+  const handleRegistration = () => {
+    validateEmail(setEmailValidationError)(authCard.email);
+    validatePassword(setPasswordValidationError)(authCard.password1);
   };
 
   console.log(emailValidationError, passwordValidationError);
   return (
     <div className="container authContainer">
       <div className="card authCard">
-        <form className="form" onSubmit={(e) => handleRegistration(e)}>
-          <h2>Войти</h2>
+        <form className="form">
+          <div className="formTitle">Войти</div>
           <Input
             type="email"
             label="Электронная почта"
             placeholder="example@mail.ru"
             required={true}
+            errorMessage={emailValidationError}
           />
           <Input
             type="password1"
             label="Пароль"
             placeholder="Введите пароль"
             required={true}
+            errorMessage={passwordValidationError}
           />
         </form>
-        <button className="btnSubmit">Войти</button>
+        <button className="btnSubmit" onClick={handleRegistration}>
+          Войти
+        </button>
         <p className="loginLink">
           Ещё не зарегистрированы ? <Link to="/register">Регистрация</Link>
         </p>

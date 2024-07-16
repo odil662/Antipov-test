@@ -3,7 +3,13 @@ import { InputTypesProps } from "../Types/types";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { OrderContext } from "./Context";
 
-const Input = ({ required, type, placeholder, label }: InputTypesProps) => {
+const Input = ({
+  required,
+  type,
+  placeholder,
+  label,
+  errorMessage,
+}: InputTypesProps) => {
   const [value, setInputValue] = useState("");
   const [isPassShow, setIsPassShow] = useState(false);
   const { authCard, setAuthCard } = useContext(OrderContext);
@@ -53,6 +59,7 @@ const Input = ({ required, type, placeholder, label }: InputTypesProps) => {
             required={required}
           />
         )}
+        {errorMessage ? <span className="error-text">{errorMessage}</span> : ""}
       </label>
     </>
   );
